@@ -1,20 +1,21 @@
-# GSTFlow – GST Practice Management System
+<div align="center">
 
-> **Project status:** Backend foundation / in development. This repository currently contains a Spring Boot application entry point, JPA domain model, Spring Data repositories, a MySQL Flyway schema, and repository-layer tests. It does not yet contain REST controllers, service classes, an Angular frontend, or an implemented end-user workflow.
+# GSTFlow
+### GST Practice Management System
 
-GSTFlow is a planned web-based GST and tax practice management system for GST consultants, chartered accountants, tax professionals, accounting firms, and internal office staff. Its goal is to bring client records, compliance work, documents, staff assignments, reconciliation, and billing into one system instead of relying on separate spreadsheets and informal follow-ups.
+**A backend foundation for organizing client records, GST compliance work, staff assignments, reconciliation, and billing.**
 
-The initial product is intended for practices with approximately 200–500 clients and a small internal team. This is a target use case, not a measured or validated performance claim.
+[![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.2.0-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Build](https://img.shields.io/badge/build-Maven- C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
 
-## Project Banner
+</div>
 
-No project banner is currently present in the repository. Add one here when available:
-
-<!-- Replace this placeholder with a real, repository-hosted banner image. -->
-`[Project banner — coming soon]`
+> **Project status: in development.** The repository currently provides a Spring Boot application bootstrap, JPA domain model, Spring Data repositories, a MySQL Flyway schema migration, and repository tests. It does not yet contain REST controllers, service-layer workflows, or a frontend. A data model is groundwork—not a finished, user-facing feature.
 
 ## Table of Contents
 
+- [Project Banner](#project-banner)
 - [Key Features](#key-features)
 - [Business Problem](#business-problem)
 - [Solution](#solution)
@@ -37,118 +38,121 @@ No project banner is currently present in the repository. Add one here when avai
 - [Author](#author)
 - [License](#license)
 
+## Project Banner
+
+No banner image is present in the repository yet.
+
+<!-- Replace this placeholder with a real, repository-hosted banner when one is available. -->
+
+> **GSTFlow — GST Practice Management System** *(project banner coming soon)*
+
 ## Key Features
 
-The current codebase establishes backend data and persistence foundations. A schema or entity is not, by itself, a complete user-facing feature; the status below distinguishes implemented foundations from workflows that are not present yet.
+### Implemented foundation
 
-### Present in the repository
+- Java 17 / Spring Boot application entry point.
+- JPA entities for users, roles, clients, GST registrations, assignments, compliance obligations, tasks, documents, follow-ups, reconciliation, billing, payments, notifications, and audit records.
+- Spring Data JPA repositories, including query methods for assigned tasks, overdue tasks and obligations, and unread notifications.
+- A Flyway V1 migration defining the relational database schema.
+- Repository-layer tests using an H2 in-memory database.
 
-- Java 17 / Spring Boot application bootstrap
-- JPA entities for users, roles, clients, GST registrations, assignments, compliance obligations, tasks, documents, follow-ups, reconciliation, billing, payments, notifications, and audit records
-- Spring Data JPA repositories, including query methods for assigned tasks, overdue tasks, compliance obligations, and unread notifications
-- Flyway V1 migration defining the relational schema
-- Repository-layer tests using an H2 database
-- Spring Security dependency configured in Maven (no application security policy or authentication flow was found)
+### Not yet implemented end-to-end
 
-### Not implemented as end-to-end workflows yet
-
-There are no REST controllers or service-layer classes in the repository tree, and there is no frontend. Accordingly, the entities and schema for a module should be treated as backend groundwork, not evidence that the full feature is available to users.
+The repository does not currently include controllers, application services, authentication flows, or a web client. Features described below as data-model foundations should not be interpreted as available production workflows.
 
 ## Business Problem
 
-GST practices commonly coordinate client information, deadlines, supporting documents, and staff work across spreadsheets, email, messaging applications, and separate accounting tools. This can make it harder to maintain a shared view of obligations, ownership, outstanding documents, reconciliation status, and client billing.
+GST consultants, chartered accountants, tax professionals, and accounting teams often coordinate client details, filing deadlines, supporting documents, staff work, and payments using disconnected spreadsheets, messaging, email, and accounting tools. Dispersed information can make follow-ups and workload visibility harder to manage.
 
-GSTFlow is being developed to provide a centralized foundation for those practice-management activities. The repository does not claim that it currently replaces these existing tools in a production environment.
+GSTFlow is intended to provide a centralized practice-management foundation for these activities. Its initial target use case is a practice with roughly **200–500 clients and six internal users**; this is a product goal, not a measured capacity or performance claim.
 
 ## Solution
 
-The project is structured as a single Spring Boot application backed by a relational database. Its domain model links clients and GST registrations to service types, compliance obligations, tasks, documents, follow-ups, reconciliation records, invoices, and payments. User and role entities support a future staff access model. REST endpoints and a web client can be added as the application evolves.
+GSTFlow is being developed as a single Spring Boot application backed by a relational database. Its domain model connects clients and registrations to services, obligations, tasks, documents, reconciliation records, invoices, and payments. The current repository establishes persistence groundwork; the application workflows and user experience remain under development.
 
 ## Technology Stack
 
-### Configured / used in the current repository
-
-| Technology | Usage |
+| Technology | Repository evidence / status |
 |---|---|
-| Java 17 | Application language and configured Maven compiler version |
-| Spring Boot 4.2.0 | Application framework and dependency management parent declared in `pom.xml` |
-| Spring Web MVC | Web starter dependency; no REST controllers are present yet |
-| Spring Data JPA / Hibernate | Persistence mappings and repository interfaces |
-| Spring Security | Dependency is configured; authentication and authorization behavior are not implemented in the inspected source |
-| Spring Validation | Starter dependency configured; request DTO/controller validation is not yet visible |
-| Spring Actuator | Starter dependency configured |
-| MySQL Connector/J | Runtime database driver |
-| MySQL | Database target, confirmed by JDBC configuration and Flyway SQL migration |
-| Flyway | Database migration dependency and V1 schema migration |
-| Maven | Build system; Maven Wrapper scripts are included |
-| Lombok | Used by model classes for getters, setters, and constructors |
-| JUnit 5 and AssertJ | Test dependencies and repository-layer assertions |
-| H2 | In-memory database dependency for repository tests |
+| Java 17 | Configured in `pom.xml` |
+| Spring Boot 4.2.0 | Maven parent version |
+| Spring Web MVC | Dependency configured; no REST controllers yet |
+| Spring Data JPA / Hibernate | JPA entities and Spring Data repositories; Hibernate is the configured JPA provider/dialect |
+| Spring Security | Dependency configured; no authentication or authorization flow found |
+| Spring Validation | Dependency configured; no controller request-validation flow found |
+| Spring Boot Actuator | Dependency configured |
+| MySQL | Runtime driver, application configuration, and MySQL-specific migration |
+| Flyway | Migration dependency and `V1__create_gstflow_tables.sql` |
+| Maven | Build system; Maven Wrapper scripts are checked in |
+| Lombok | Used by entity classes |
+| JUnit 5 / AssertJ | Test dependencies and repository test assertions |
+| H2 | In-memory test database |
 
-### Not found as configured technologies
-
-No Angular project files, RabbitMQ dependency/configuration, Mockito dependency, Swagger/OpenAPI dependency, or Docker files were found in the repository tree inspected for this README. Do not assume these are part of the current application.
+**Not configured/found:** Angular or another frontend, RabbitMQ, Mockito, Swagger/OpenAPI, and Docker. These should not be considered part of the current stack.
 
 ## System Architecture
 
-GSTFlow is intended to remain a **modular monolith**, not a microservices system. The diagram distinguishes the checked-in backend foundation (solid nodes) from application layers and clients that are not present yet (dashed nodes).
+GSTFlow is structured as a **modular monolith**, not a microservices system. The diagram distinguishes existing persistence/bootstrap components from application layers and clients that are not present yet.
 
 ```mermaid
 flowchart LR
-    UI[Web client / Angular<br/>not present yet] -. planned HTTP .-> API[REST API / Controllers<br/>not present yet]
-    API -. delegates to .-> SVC[Service layer<br/>not present yet]
+    UI[Angular or other web frontend<br/>not present] -. future HTTP .-> API[REST controllers<br/>not present]
+    API -. delegates to .-> SVC[Service layer<br/>not present]
     SVC -. uses .-> REPO[Spring Data JPA repositories<br/>present]
-    REPO --> ORM[Hibernate / JPA mappings<br/>present]
-    ORM --> DB[(MySQL database<br/>configured target)]
-    MIG[Flyway migrations<br/>V1 present] --> DB
-    BOOT[Spring Boot application<br/>present] --> REPO
+    REPO --> ORM[Hibernate / JPA entity mappings<br/>present]
+    ORM --> DB[(MySQL<br/>configured database target)]
+    MIG[Flyway migration<br/>V1 present] --> DB
+    APP[Spring Boot application<br/>present] --> REPO
 ```
 
-The checked-in code establishes the application bootstrap, persistence model, repository layer, and schema migration. No separate frontend, REST controller layer, or service layer is currently included. RabbitMQ is not configured.
+RabbitMQ is not configured. The current codebase contains the application bootstrap, entity mappings, repositories, migration, and tests; it does not yet contain a controller or service layer.
 
 ## Application Modules
 
-Statuses below refer to evidence in this repository, not to the broader product vision.
+Statuses reflect checked-in evidence, not the broader product vision.
 
-| Module | Current status | Repository evidence / scope |
+| Module | Current status | What is present |
 |---|---|---|
-| Client Management | **Data model present** | Client profile and contact entities, client repository |
-| Multiple GST Registrations | **Data model present** | Registrations are related to a client; each GSTIN is unique in the schema |
-| Staff and User Management | **Data model present** | User and role entities, plus user repository; no user-management API or UI |
-| Role-Based Access Control | **Partial foundation only** | Role relation and Spring Security dependency exist; no authorization rules or login flow found |
-| GST Compliance Tracking | **Data model and repository queries present** | Compliance obligations include service, period, due date, status, and assignee; overdue and filter queries exist |
-| GSTR-1 and GSTR-3B tracking | **Not specifically implemented** | A generic service type / obligation model exists; no filing-specific workflow or endpoints were found |
-| ITC Reconciliation | **Data model present** | Import batches, reconciliation runs, and reconciliation items are modeled; no reconciliation processing workflow/API found |
-| GST Registration Management | **Data model present** | GST registration records and status fields are modeled; no management workflow/API found |
-| ITR and TDS Tracking | **Not implemented** | No ITR/TDS domain entities or workflows found |
-| E-way Bill and E-invoice Tracking | **Not implemented** | No corresponding entities or workflows found |
-| Task Management | **Data model and repository queries present** | Tasks have assignees, clients, due dates, priority, and status; repository supports assignment/status/overdue queries |
-| Client Follow-ups | **Data model present** | Follow-up date, channel, reason, outcome, and next follow-up fields are modeled |
-| Document Management | **Metadata model present** | Document metadata stores a `storage_key`; no upload/download or storage implementation found |
-| Invoice and Billing Management | **Data model present** | Billing invoices and invoice items are modeled |
-| Payment Tracking | **Data model present** | Payments and invoice allocations are modeled |
-| Dashboard and Reports | **Not implemented** | No report/dashboard endpoints or frontend found |
-| Audit Logging | **Data model present** | Audit-log entity and table are defined; automatic audit event capture was not found |
-| Notifications | **Data model and repository query present** | User notifications and read timestamp are modeled; no delivery mechanism found |
+| Client Management | **Data model** | Client and client-contact entities, migration tables, and client repository |
+| Multiple GST Registrations | **Data model** | Client registrations linked to clients; GSTIN uniqueness in the schema |
+| Staff and User Management | **Data model** | User and role entities and repositories; no management API/UI |
+| Role-Based Access Control | **Partial foundation** | User-to-role relation and Spring Security dependency; no authorization rules or login flow found |
+| GST Compliance Tracking | **Data model + repository queries** | Obligations, due dates, statuses, assignments, and overdue/filter repository queries |
+| GSTR-1 and GSTR-3B tracking | **Generic groundwork only** | Generic service/obligation model; no filing-specific workflow or API |
+| ITC Reconciliation | **Data model** | Import batches, reconciliation runs, and reconciliation items; no processing workflow/API |
+| GST Registration Management | **Data model** | Registration records and status fields; no management workflow/API |
+| ITR and TDS Tracking | **Not implemented** | No ITR/TDS domain model or workflow found |
+| E-way Bill and E-invoice Tracking | **Not implemented** | No corresponding model or workflow found |
+| Task Management | **Data model + repository queries** | Task assignment, status, priority, due date, and overdue/filtered queries |
+| Client Follow-ups | **Data model** | Follow-up date, channel, reason, outcome, and next-follow-up fields |
+| Document Management | **Metadata model** | Document metadata and storage key; upload/download and storage implementation not found |
+| Invoice and Billing Management | **Data model** | Billing invoices and invoice items |
+| Payment Tracking | **Data model** | Payments and invoice allocations |
+| Dashboard and Reports | **Not implemented** | No dashboard/report API or frontend found |
+| Audit Logging | **Data model** | Audit-log entity and table; automatic event capture not found |
+| Notifications | **Data model + repository query** | User notifications and unread-notification query; no delivery mechanism found |
 
-All modules above are **in development as product capabilities** unless explicitly marked not implemented. “Data model present” describes persistence groundwork only.
+**Overall:** these product capabilities are in development. “Data model” means persistence structures exist; it does not mean users can operate the capability today.
 
 ## Database Design
 
-The Flyway migration at `src/main/resources/db/migration/V1__create_gstflow_tables.sql` creates the following tables:
+The initial Flyway migration is `src/main/resources/db/migration/V1__create_gstflow_tables.sql`. It defines these tables:
 
-- **Identity and clients:** `roles`, `users`, `clients`, `client_contacts`, `client_registrations`
-- **Services and work:** `service_types`, `client_services`, `client_assignments`, `compliance_obligations`, `tasks`
-- **Documents and communication:** `documents`, `document_requests`, `follow_ups`, `notifications`
-- **Imports and reconciliation:** `import_batches`, `reconciliation_runs`, `reconciliation_items`
-- **Billing and payments:** `billing_invoices`, `invoice_items`, `payments`, `payment_allocations`
-- **Audit:** `audit_logs`
+| Area | Tables |
+|---|---|
+| Identity | `roles`, `users` |
+| Clients and services | `clients`, `client_contacts`, `client_registrations`, `service_types`, `client_services`, `client_assignments` |
+| Compliance and work | `compliance_obligations`, `tasks`, `follow_ups` |
+| Documents | `documents`, `document_requests` |
+| Imports and reconciliation | `import_batches`, `reconciliation_runs`, `reconciliation_items` |
+| Billing and payments | `billing_invoices`, `invoice_items`, `payments`, `payment_allocations` |
+| Supporting records | `notifications`, `audit_logs` |
 
-The migration defines foreign keys between these records. Examples include users to roles, registrations and contacts to clients, obligations to clients/registrations/service types, tasks to clients and users, reconciliation runs to registrations and import batches, and payment allocations to payments and invoices. The diagram below captures the principal verified relationships; it is not a column-by-column schema listing.
-
-The migration uses MySQL-specific types and syntax, including `AUTO_INCREMENT`, `DATETIME(6)`, `BIT`, and `JSON`. Hibernate schema validation is configured, while Flyway owns schema creation and evolution.
+Foreign keys in the migration define the relationships represented below. Optional links (for example, an obligation's registration or a task's obligation) are nullable in the schema. `spring.jpa.hibernate.ddl-auto=validate` is configured, so Flyway owns schema creation and Hibernate validates entity mappings against it.
 
 ## Entity Relationship Diagram
+
+The following diagram summarizes relationships verified in the V1 SQL migration. It omits some secondary user references to keep the overview readable.
 
 ```mermaid
 erDiagram
@@ -159,81 +163,74 @@ erDiagram
     SERVICE_TYPES ||--o{ CLIENT_SERVICES : defines
     CLIENTS ||--o{ CLIENT_ASSIGNMENTS : assigned
     USERS ||--o{ CLIENT_ASSIGNMENTS : receives
-    USERS ||--o{ CLIENT_ASSIGNMENTS : assigns
     CLIENTS ||--o{ COMPLIANCE_OBLIGATIONS : tracks
-    CLIENT_REGISTRATIONS o|--o{ COMPLIANCE_OBLIGATIONS : applies_to
+    CLIENT_REGISTRATIONS o|--o{ COMPLIANCE_OBLIGATIONS : scopes
     SERVICE_TYPES ||--o{ COMPLIANCE_OBLIGATIONS : classifies
     USERS o|--o{ COMPLIANCE_OBLIGATIONS : assigned_to
     CLIENTS ||--o{ TASKS : has
     COMPLIANCE_OBLIGATIONS o|--o{ TASKS : relates_to
     USERS ||--o{ TASKS : assigned_to
-    USERS ||--o{ TASKS : created_by
-    CLIENTS ||--o{ DOCUMENTS : stores_metadata_for
+    CLIENTS ||--o{ DOCUMENTS : has_metadata
     CLIENT_REGISTRATIONS o|--o{ DOCUMENTS : relates_to
     COMPLIANCE_OBLIGATIONS o|--o{ DOCUMENTS : relates_to
-    USERS ||--o{ DOCUMENTS : uploaded_by
-    CLIENTS ||--o{ DOCUMENT_REQUESTS : requests_for
+    CLIENTS ||--o{ DOCUMENT_REQUESTS : requests
     DOCUMENTS o|--o{ DOCUMENT_REQUESTS : fulfills
-    CLIENTS ||--o{ FOLLOW_UPS : follows_up
+    CLIENTS ||--o{ FOLLOW_UPS : receives
     COMPLIANCE_OBLIGATIONS o|--o{ FOLLOW_UPS : relates_to
-    CLIENTS o|--o{ IMPORT_BATCHES : imported_for
+    CLIENTS o|--o{ IMPORT_BATCHES : has
     CLIENTS ||--o{ RECONCILIATION_RUNS : reconciles
     CLIENT_REGISTRATIONS ||--o{ RECONCILIATION_RUNS : scopes
-    IMPORT_BATCHES o|--o{ RECONCILIATION_RUNS : purchase_import
-    IMPORT_BATCHES o|--o{ RECONCILIATION_RUNS : gstr2b_import
+    IMPORT_BATCHES o|--o{ RECONCILIATION_RUNS : supplies
     RECONCILIATION_RUNS ||--o{ RECONCILIATION_ITEMS : contains
     CLIENTS ||--o{ BILLING_INVOICES : billed
     BILLING_INVOICES ||--o{ INVOICE_ITEMS : contains
-    CLIENTS ||--o{ PAYMENTS : pays
+    CLIENTS ||--o{ PAYMENTS : makes
     PAYMENTS ||--o{ PAYMENT_ALLOCATIONS : allocates
     BILLING_INVOICES ||--o{ PAYMENT_ALLOCATIONS : receives
     USERS ||--o{ NOTIFICATIONS : receives
     USERS o|--o{ AUDIT_LOGS : actor
 ```
 
-`o|` represents an optional relationship as indicated by nullable foreign keys in the migration. Several user references (for example, creators and uploaders) are omitted from this compact diagram where the relationship is already represented by the same entity type.
-
 ## Project Structure
 
 ```text
 .
-├── .mvn/wrapper/                  # Maven Wrapper configuration
-├── mvnw                           # Maven Wrapper (Unix-like systems)
-├── mvnw.cmd                       # Maven Wrapper (Windows)
-├── pom.xml                        # Spring Boot, dependencies, and build configuration
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/GSTHub/
-│   │   │   ├── GstHubApplication.java
-│   │   │   ├── Model/              # JPA entities
-│   │   │   └── Repository/         # Spring Data repositories
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       └── db/migration/       # Flyway SQL migrations
-│   └── test/java/com/example/GSTHub/
-│       ├── GstHubApplicationTests.java
-│       └── repository/             # Repository-layer tests
-└── README.md
+├── .mvn/wrapper/                         # Maven Wrapper configuration
+├── mvnw                                  # Maven Wrapper (Unix-like systems)
+├── mvnw.cmd                              # Maven Wrapper (Windows)
+├── pom.xml                               # Spring Boot dependencies and build configuration
+└── src
+    ├── main
+    │   ├── java/com/example/GSTHub
+    │   │   ├── GstHubApplication.java    # Spring Boot entry point
+    │   │   ├── Model/                    # JPA entities
+    │   │   └── Repository/               # Spring Data repositories
+    │   └── resources
+    │       ├── application.properties
+    │       └── db/migration/             # Flyway SQL migrations
+    └── test/java/com/example/GSTHub
+        ├── GstHubApplicationTests.java
+        └── repository/                   # Repository-layer tests
 ```
 
-There are no frontend source files, REST controller package, service package, or Docker configuration in the inspected tree.
+There are no frontend source files, REST controller package, service package, or Docker configuration in the inspected repository.
 
 ## API Documentation
 
-**API documentation is upcoming.** No REST controller classes or OpenAPI/Swagger configuration are present in the repository, so there are no verified HTTP routes to document. Repository methods are persistence operations, not public API endpoints.
+**API documentation is upcoming.** No REST controller classes or Swagger/OpenAPI configuration are present, so there are no verified HTTP routes to list. Spring Data repository methods are persistence operations, not public REST endpoints.
 
-The following API groups are product areas under consideration, not currently available endpoint groups: Authentication, Users, Clients, Registrations, Tasks, Compliance, Documents, Follow-ups, Reconciliation, Billing, and Reports.
+Authentication, Users, Clients, Registrations, Tasks, Compliance, Documents, Follow-ups, Reconciliation, Billing, and Reports are planned API areas—not currently available endpoint groups.
 
 ## Installation and Setup
 
 ### Prerequisites
 
-- JDK 17 (or a compatible newer JDK)
-- MySQL Server (compatible with the MySQL driver and migration SQL)
+- JDK 17
+- MySQL Server compatible with the MySQL driver and migration SQL
 - Git
-- Windows PowerShell or Command Prompt (commands below use the Windows Maven Wrapper)
+- PowerShell or Command Prompt on Windows
 
-The included Maven Wrapper downloads and runs the Maven version selected by its wrapper configuration; a separate Maven installation is not required for the commands below.
+The checked-in Maven Wrapper means a separate Maven installation is not required for the commands below.
 
 ### 1. Clone the repository
 
@@ -244,15 +241,15 @@ cd GSTHub
 
 ### 2. Install and verify Java
 
-Install a JDK 17 distribution and ensure `JAVA_HOME` points to it and `%JAVA_HOME%\bin` is on `PATH`.
+Install a JDK 17 distribution, set `JAVA_HOME`, and add `%JAVA_HOME%\bin` to `PATH`.
 
 ```powershell
 java -version
 ```
 
-### 3. Create a MySQL database
+### 3. Create a database
 
-Start MySQL Server, then connect with a MySQL client and create a database:
+Start MySQL, then create the local development database:
 
 ```sql
 CREATE DATABASE gstflow_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -260,7 +257,7 @@ CREATE DATABASE gstflow_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 ### 4. Configure database access
 
-Set up local credentials using the guidance in [Database Configuration](#database-configuration). Never commit actual credentials.
+Set local credentials as described in [Database Configuration](#database-configuration). Do not commit credentials or use development credentials in a deployed environment.
 
 ### 5. Build and test
 
@@ -270,26 +267,21 @@ Set up local credentials using the guidance in [Database Configuration](#databas
 
 ### Frontend setup
 
-No frontend application is present in this repository, so there are currently no frontend installation or run commands.
+No frontend application is present in this repository, so frontend installation and run steps are not applicable yet.
 
 ## Database Configuration
 
-`src/main/resources/application.properties` configures the MySQL URL, username, password, driver, Hibernate dialect, and Flyway. The checked-in file currently contains literal local credential values; they are deliberately not repeated here. Replace those values with local-only credentials before running the app, and avoid committing credentials.
+`src/main/resources/application.properties` sets the MySQL connection, driver, Hibernate validation, SQL logging, and Flyway options. The checked-in properties file currently contains literal local database credentials; replace or override these for local use and remove inline credentials before deployment. **Never publish real credentials.**
 
-The application uses `spring.jpa.hibernate.ddl-auto=validate` and enables Flyway. On startup, Flyway applies the migration in `src/main/resources/db/migration/` and Hibernate validates the mappings against the resulting schema.
+Spring Boot supports overriding configuration through environment variables. For the current PowerShell session, configure the database connection like this (replace the placeholders):
 
-For local development, configure values equivalent to the following in a secure local configuration source:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/gstflow_db?serverTimezone=Asia/Kolkata
-spring.datasource.username=<your-local-mysql-user>
-spring.datasource.password=<your-local-mysql-password>
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.hibernate.ddl-auto=validate
-spring.flyway.enabled=true
+```powershell
+$env:SPRING_DATASOURCE_URL = "jdbc:mysql://localhost:3306/gstflow_db?serverTimezone=Asia/Kolkata"
+$env:SPRING_DATASOURCE_USERNAME = "<your-local-mysql-user>"
+$env:SPRING_DATASOURCE_PASSWORD = "<your-local-mysql-password>"
 ```
 
-This is an example of the expected settings, not a claim that the current properties file reads environment variables. Environment-variable binding has not yet been configured in the checked-in application properties.
+The application uses `spring.jpa.hibernate.ddl-auto=validate` and enables Flyway. Flyway applies migrations from `src/main/resources/db/migration/`; Hibernate then validates the mappings.
 
 ## Running the Application
 
@@ -299,101 +291,96 @@ From the repository root in PowerShell:
 .\mvnw.cmd spring-boot:run
 ```
 
-The configured server port is `8080`. The current repository does not define application REST routes, so starting the process should not be interpreted as a complete user-facing GSTFlow service.
-
-To build a packaged artifact:
+The configured server port is `8080`. Package the application with:
 
 ```powershell
 .\mvnw.cmd clean package
 ```
 
+No application REST routes or user-facing frontend are present yet; successful startup is not evidence that the planned GSTFlow workflows are available.
+
 ## Environment Variables
 
-No environment-variable placeholders are currently wired into `application.properties`. For a safer deployment configuration, externalize at minimum the database URL, username, and password and bind them through Spring configuration, for example:
+The checked-in properties file does not declare `${...}` placeholders. Spring Boot can still bind the standard environment-variable names below and use them to override properties; configure them in your shell or deployment environment rather than storing secrets in source control.
 
-```text
-SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/gstflow_db
-SPRING_DATASOURCE_USERNAME=<database-user>
-SPRING_DATASOURCE_PASSWORD=<database-password>
-```
+| Variable | Purpose | Example (placeholder) |
+|---|---|---|
+| `SPRING_DATASOURCE_URL` | JDBC URL | `jdbc:mysql://localhost:3306/gstflow_db` |
+| `SPRING_DATASOURCE_USERNAME` | Database user | `<database-user>` |
+| `SPRING_DATASOURCE_PASSWORD` | Database password | `<database-password>` |
 
-These are recommended Spring Boot environment-variable names, not currently documented as active project settings. Do not place real secrets in source control, README examples, screenshots, or issue reports.
+Do not put real passwords, API keys, JWT secrets, or private credentials in README files, screenshots, commits, or issue reports.
 
 ## Testing
 
-Run the test suite on Windows:
+Run tests on Windows:
 
 ```powershell
 .\mvnw.cmd test
 ```
 
-The repository includes a Spring Boot application test and repository-layer tests. The repository tests use H2, disable Flyway for that test slice, and rely on Hibernate schema generation. The verified tests exercise repository lookups for users, clients, GST registrations, assigned tasks, overdue compliance obligations, and unread notifications.
-
-No Mockito configuration was found in the inspected Maven dependencies. No claim is made here about full API, security, integration, or frontend test coverage.
+The repository includes an application context test and repository-layer tests for lookups and queries involving users, clients, registrations, tasks, overdue obligations, and unread notifications. Repository tests use H2, disable Flyway for that test slice, and rely on Hibernate schema generation. The repository does not claim API, end-to-end, frontend, or security test coverage.
 
 ## Security Considerations
 
 ### Current state
 
-- Spring Security is present as a Maven dependency.
-- User records include a `password_hash` field, and user records relate to a role.
-- No authentication controller, security configuration, password encoder setup, JWT implementation, authorization policy, or HTTPS configuration was found in the inspected source.
-- The current `application.properties` contains literal database credentials. Replace them with secure external configuration and do not use those local values in deployed environments.
-- Document records hold a storage key and metadata; an actual secure file-storage implementation was not found.
+- Spring Security is a configured dependency, but no authentication flow, security configuration, password encoder, JWT implementation, or backend authorization rules were found.
+- User records contain a `password_hash` field and are related to a role. A field and relationship alone do not implement password hashing or role-based access enforcement.
+- The checked-in `application.properties` contains literal local database credential values. Replace them with secure external configuration and do not use them in deployed environments.
+- Document records include a storage key and metadata, but secure file storage and access control were not found.
+- An audit-log table/entity exists, but automatic audit-event capture was not found.
 
-A dependency or database column alone does not provide operational security. Do not deploy this repository with real client or tax data until authentication, authorization, secret handling, transport security, storage controls, and security testing are implemented and reviewed.
+**Do not use the current codebase with real client, tax, or financial data until authentication, authorization, secret management, and secure document handling have been implemented and reviewed.**
 
-### Recommended follow-up work
+### Security work to implement
 
-- Add a password encoder such as BCrypt and a tested authentication flow
-- Enforce role-based authorization in backend endpoints
-- Externalize credentials and other secrets
-- Use HTTPS in deployed environments
-- Implement access-controlled document storage and upload validation
-- Ensure audit events are generated for sensitive operations
-- Add security-focused tests and review access to personal and financial data
+- Add a tested authentication flow and a password encoder such as BCrypt.
+- Enforce role-based authorization in backend endpoints.
+- Externalize credentials and other secrets for each environment.
+- Use HTTPS in deployed environments.
+- Implement access-controlled document storage and upload validation.
+- Record and test audit events for sensitive operations.
 
-These are recommendations, not claims about existing behavior.
+These are recommendations, not implemented features.
 
 ## Screenshots
 
-No application screenshots are available in the repository. Add genuine screenshots after a usable frontend exists; do not use mockups as evidence of implemented functionality.
+No application screenshots are available because a frontend is not present yet. Add genuine captures when a usable UI exists; do not present mockups as completed functionality.
 
-<!-- Suggested future captures: client list, compliance calendar, task queue, reconciliation view. -->
+<!-- Future screenshots: client workspace, compliance calendar, task queue, reconciliation view. -->
 
 ## Future Enhancements
 
-The following are planned or possible future enhancements and are **not implemented in the current repository**:
+The following are planned possibilities and are **not implemented in the current repository**:
 
-- REST API controllers and service-layer workflows
-- Web frontend (Angular is not currently configured)
-- Authentication, backend authorization, and role-based access enforcement
-- Client self-service portal
-- WhatsApp Business API integration and email reminders
-- Authorized GST portal / GSP integration
-- Automated recurring compliance generation
-- Filing-specific GSTR-1 and GSTR-3B workflows
-- Advanced reconciliation processing and reports
-- ITR, TDS, e-way bill, and e-invoice tracking
-- PDF reports and invoice generation
-- Dashboard and operational reports
-- Secure document storage and retrieval
-- Docker-based development/deployment and cloud deployment
+- REST controllers and service-layer workflows for the modeled domains.
+- Web client, potentially using Angular.
+- Client self-service portal.
+- WhatsApp Business API integration and email reminders.
+- Authorized GST portal / GSP integration.
+- Automated recurring compliance generation and filing-specific GSTR-1 / GSTR-3B workflows.
+- ITC reconciliation processing and advanced reconciliation reports.
+- ITR, TDS, e-way bill, and e-invoice tracking.
+- Secure document upload, storage, and retrieval.
+- Dashboard, PDF reports, and PDF invoices.
+- Docker-based development/deployment and cloud deployment.
+- Authentication, backend authorization, and operational audit logging.
 
-RabbitMQ is not currently configured; it should only be introduced if a concrete asynchronous processing requirement is identified.
+RabbitMQ is not currently configured; it should be considered only if a concrete asynchronous processing requirement arises.
 
 ## Contribution Guidelines
 
 Contributions are welcome as the project develops. Before opening a pull request:
 
-1. Open an issue or discussion to describe the proposed change and its scope.
-2. Keep changes focused; avoid mixing unrelated features or formatting changes.
+1. Open an issue to describe the proposed change and its scope.
+2. Keep changes focused and avoid mixing unrelated work.
 3. Add or update tests for behavioral changes.
-4. Run `. mvnw.cmd test` from the repository root on Windows (or `./mvnw test` on Unix-like systems).
+4. Run `.mvnw.cmd test` on Windows (or `./mvnw test` on Unix-like systems).
 5. Do not commit credentials, private client data, generated files, or secrets.
 6. Update this README when setup steps, schema, dependencies, or implemented capabilities change.
 
-Submit pull requests with a clear summary, motivation, and test results. The project is currently distributed under a custom, restrictive notice; obtain permission from the copyright holder before reusing project code. See [LICENSE](LICENSE).
+Include a clear summary, motivation, and test results in your pull request. The repository has a custom, restrictive license; obtain the copyright holder's permission before contributing or reusing code.
 
 ## Author
 
@@ -403,4 +390,4 @@ Submit pull requests with a clear summary, motivation, and test results. The pro
 
 Copyright (c) 2026 Thushar7. All rights reserved.
 
-No permission is granted to copy, reproduce, modify, distribute, publish, publicly display, perform, sublicense, sell, or otherwise use this software, or any substantial part of it, without prior written permission from the copyright holder. See [LICENSE](LICENSE) for the full notice.
+The repository's `LICENSE` file grants no permission to copy, modify, distribute, publish, or otherwise use the software without prior written permission from the copyright holder. This is a custom restrictive license, not an open-source license grant.
