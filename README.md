@@ -12,7 +12,7 @@
   <img alt="Maven" src="https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white">
 </p>
 
-> **Project status:** In active development. This repository currently provides a Spring Boot backend foundation with a complete domain model, JPA repositories, MySQL/Flyway configuration, and repository-level tests. REST controllers, services, authentication, frontend UI, and end-user workflows are still being implemented.
+> **Project status:** In active development. This repository currently provides a Spring Boot backend foundation with a complete domain model, JPA repositories, MySQL/Flyway configuration, and repository-level tests.
 
 ## Table of Contents
 
@@ -42,9 +42,9 @@
 
 ## Project Title and Overview
 
-**GSTFlow** is a backend-in-progress web platform for digitizing GST practice operations. It is intended to centralize client records, GST registrations, compliance obligations, staff assignments, documents, reconciliation data, billing, follow-ups, notifications, and audit activity.
+**GSTFlow** is a backend-in-progress web platform for digitizing GST practice operations. It is intended to centralize client records, GST registrations, compliance obligations, staff assignments, tasks, documents, follow-ups, reconciliation imports, billing, payments, notifications, and audit trails.
 
-The project is designed for GST consultants, chartered accountants, tax professionals, accounting firms, and internal office teams, with an initial target scale of approximately 200–500 clients and six internal users.
+The project is designed for GST consultants, chartered accountants, tax professionals, accounting firms, and internal office teams, with an initial target scale of approximately 200–500 clients and one to five internal staff users.
 
 ### Repository naming
 
@@ -118,7 +118,7 @@ GST practice teams commonly manage client information across spreadsheets and ma
 
 ## Solution
 
-GSTFlow is designed to provide a single operational backend for GST service workflows. The domain model records the relationships between clients, registrations, assigned staff, compliance obligations, supporting documents, reconciliation runs, invoices, payments, follow-ups, notifications, and audit events.
+GSTFlow is designed to provide a single operational backend for GST service workflows. The domain model records the relationships between clients, registrations, assigned staff, compliance obligations, tasks, documents, follow-ups, reconciliation data, invoices, payments, notifications, and audit actions.
 
 At the current stage, the repository establishes the persistence and data-management foundation. The application is not yet a complete usable web product.
 
@@ -484,7 +484,7 @@ The repository currently includes:
   - overdue compliance obligations
   - unread notifications
 
-Repository tests disable Flyway and use Hibernate `create-drop` against H2. This is an appropriate test-layer separation for the current persistence foundation, but end-to-end API, service, security, and integration coverage remains planned.
+Repository tests disable Flyway and use Hibernate `create-drop` against H2. This is an appropriate test-layer separation for the current persistence foundation, but end-to-end API, service, security, and frontend testing are still needed.
 
 ## Security Considerations
 
@@ -600,4 +600,4 @@ Please avoid committing local database passwords, secrets, generated build outpu
 
 ## License
 
-No license is currently included in the repository. A license should be added before public commercial or production distribution.
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for the full license text.
