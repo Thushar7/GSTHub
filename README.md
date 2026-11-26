@@ -5,10 +5,17 @@
 
 **A Java and Spring Boot backend foundation for organizing GST practice operations, client records, compliance workflows, reconciliation, and billing.**
 
-[![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+[![Java](https://img.shields.io/badge/Java-17%2B-ED8B00?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.2.0-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
-[![MySQL](https://img.shields.io/badge/MySQL-Configured-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Spring Security](https://img.shields.io/badge/Spring_Security-RBAC-6DB33F?logo=springsecurity&logoColor=white)](https://spring.io/projects/spring-security)
+[![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Flyway](https://img.shields.io/badge/Flyway-Migrations-CC0200?logo=flyway&logoColor=white)](https://flywaydb.org/)
+[![Angular](https://img.shields.io/badge/Angular-Planned-DD0031?logo=angular&logoColor=white)](https://angular.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Planned-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![RabbitMQ](https://img.shields.io/badge/RabbitMQ-Planned-FF6600?logo=rabbitmq&logoColor=white)](https://www.rabbitmq.com/)
+[![Docker](https://img.shields.io/badge/Docker-Planned-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![JUnit 5](https://img.shields.io/badge/JUnit-5-25A162?logo=junit5&logoColor=white)](https://junit.org/)
+[![Maven](https://img.shields.io/badge/Maven-Build-C71A36?logo=apachemaven&logoColor=white)](https://maven.apache.org/)
 [![Status](https://img.shields.io/badge/Status-In_Development-FFA500)](#project-status)
 
 </div>
@@ -218,7 +225,7 @@ The migration `src/main/resources/db/migration/V1__create_gstflow_tables.sql` de
 - **Billing:** `billing_invoices`, `invoice_items`, `payments`, `payment_allocations`
 - **Cross-cutting records:** `notifications`, `audit_logs`
 
-The migration defines foreign-key relationships including roles to users; clients to contacts, registrations, services, assignments, obligations, tasks, documents, follow-ups, reconciliation runs, invoices, and payments; users to assignments and work records; service types to client services and compliance obligations; reconciliation runs to registrations/import batches/items; and payments to invoice allocations.
+The migration defines foreign-key relationships including roles to users; clients to contacts, registrations, services, assignments, obligations, tasks, documents, follow-ups, reconciliation runs, invoices, and payments; users to assignments and work records; service types to client services and obligations; reconciliation runs to registrations/import batches/items; and payments to invoices through allocations.
 
 ## 10. Entity Relationship Diagram
 
@@ -366,7 +373,7 @@ CREATE DATABASE gstflow_db
 
 ### 4. Configure database access
 
-The current `application.properties` contains local datasource settings. Before running the app, configure the JDBC URL, username, and password for your own MySQL instance. Do not commit real credentials. Environment variable placeholders are shown in the configuration section, but the application does not currently bind all settings to environment variables automatically; update the configuration or add Spring property placeholders as a separate implementation change.
+The current `application.properties` contains local datasource settings. Before running the app, configure the JDBC URL, username, and password for your own MySQL instance. Do not commit real credentials. Environment-variable placeholders are shown in the configuration section, but the application does not currently bind all settings to environment variables automatically; update the configuration or add Spring property placeholders as a separate implementation change.
 
 ### 5. Build and test
 
